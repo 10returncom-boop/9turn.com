@@ -1,0 +1,13 @@
+# ===== ArtArchive Python 依賴 =====
+# 安裝方式：python -m pip install -r requirements.txt
+
+# 本地圖檔處理（WebP/縮圖生成、解析檔名）
+Pillow>=10.0.0
+
+# Google Drive API（僅 upload_share_links.py 需要）
+google-api-python-client>=2.100.0
+google-auth>=2.23.0
+google-auth-oauthlib>=1.0.0
+
+# 環境變數讀取（.env）
+python-dotenv>=1.0.0

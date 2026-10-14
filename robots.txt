@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://9turn.com/sitemap.xml

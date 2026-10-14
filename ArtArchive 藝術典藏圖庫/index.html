@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtArchive · 藝術典藏圖庫</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='4' fill='%23121417'/%3E%3Crect x='7' y='7' width='10' height='10' rx='1.5' stroke='%23c9a86a' stroke-width='1.6' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#121417; --surface:#181b1f; --panel:#20242a;
+    --text:#ece6da; --muted:#98917f; --faint:#6c6759;
+    --hairline:rgba(236,230,218,.10); --hairline-strong:rgba(236,230,218,.18);
+    --gold:#c9a86a; --gold-soft:rgba(201,168,106,.13);
+    --serif:'Noto Serif SC', 'Songti TC', 'SimSun', serif;
+    --sans:'Noto Sans SC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--text); font-family:var(--sans); font-weight:300;
+       line-height:1.6; -webkit-font-smoothing:antialiased;}
+
+  /* 頂欄 */
+  .topbar{position:sticky; top:0; z-index:30; background:rgba(18,20,23,.82);
+       backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+       border-bottom:1px solid var(--hairline);}
+  .bar-inner{max-width:1280px; margin:0 auto; padding:14px 22px; display:flex;
+       align-items:center; gap:18px; flex-wrap:wrap;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{width:34px; height:34px; flex:0 0 auto; border:1.5px solid var(--gold); border-radius:7px;
+       display:grid; place-items:center; color:var(--gold);}
+  .brand h1{font-family:var(--serif); font-weight:600; font-size:1.16rem; letter-spacing:.02em;}
+  .brand .en{display:block; font-family:var(--sans); font-weight:400; font-size:.66rem;
+       color:var(--muted); letter-spacing:.32em; text-transform:uppercase; margin-top:2px;}
+  .search{flex:1 1 260px; max-width:420px; margin-left:auto; display:flex; align-items:center;
+       gap:10px; background:var(--surface); border:1px solid var(--hairline); border-radius:999px;
+       padding:9px 16px;}
+  .search svg{flex:0 0 auto; color:var(--muted);}
+  .search input{border:none; background:none; outline:none; color:var(--text); width:100%;
+       font-family:var(--sans); font-weight:300; font-size:.9rem;}
+  .search input::placeholder{color:var(--faint);}
+  .count{font-size:.78rem; color:var(--muted); white-space:nowrap;}
+  .count b{color:var(--gold); font-weight:600;}
+
+  /* 篩選 */
+  .filters{max-width:1280px; margin:0 auto; padding:14px 22px 4px; display:flex; gap:10px;
+       flex-wrap:wrap; align-items:center;}
+  .chip{appearance:none; border:1px solid var(--hairline); background:transparent; color:var(--muted);
+       font-family:var(--sans); font-weight:400; font-size:.86rem; padding:7px 16px; border-radius:999px;
+       cursor:pointer; transition:color .18s, border-color .18s, background .18s;}
+  .chip:hover{color:var(--text); border-color:var(--hairline-strong);}
+  .chip.on{color:#14100a; background:var(--gold); border-color:var(--gold); font-weight:500;}
+  .legend{margin-left:auto; font-size:.76rem; color:var(--faint); letter-spacing:.06em;}
+
+  /* Hero 帶 */
+  .hero{max-width:1280px; margin:0 auto; padding:54px 22px 30px; text-align:center;}
+  .hero .kicker{font-family:var(--sans); font-size:.74rem; letter-spacing:.4em; color:var(--gold);
+       text-transform:uppercase;}
+  .hero h2{font-family:var(--serif); font-weight:600; font-size:clamp(1.6rem,3.6vw,2.6rem);
+       margin-top:12px; letter-spacing:.04em;}
+  .hero p{max-width:560px; margin:16px auto 0; color:var(--muted); font-size:.95rem;}
+  .hero .statline{margin-top:22px; display:flex; gap:34px; justify-content:center; flex-wrap:wrap;}
+  .hero .stat{text-align:center;}
+  .hero .stat b{font-family:var(--serif); font-size:1.5rem; color:var(--text); display:block;}
+  .hero .stat span{font-size:.74rem; color:var(--faint); letter-spacing:.14em;}
+
+  /* 畫廊 */
+  .gallery{max-width:1280px; margin:0 auto; padding:18px 22px 60px;}
+  .grid{display:grid; gap:16px;
+       grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}
+  .card{position:relative; border-radius:6px; overflow:hidden; cursor:pointer;
+       background:var(--surface); border:1px solid var(--hairline);
+       transition:border-color .2s, transform .2s;}
+  .card:hover{border-color:var(--hairline-strong); transform:translateY(-3px);}
+  .card .thumb{display:block; width:100%; aspect-ratio:3/4; object-fit:cover; transition:transform .45s ease;}
+  .card:hover .thumb{transform:scale(1.04);}
+  .card .cap{position:absolute; inset:auto 0 0 0; padding:26px 13px 12px;
+       background:linear-gradient(to top, rgba(10,11,13,.9), rgba(10,11,13,0));
+       pointer-events:none;}
+  .card .cap .t{font-family:var(--serif); font-size:.98rem; color:var(--text);}
+  .card .cap .m{font-size:.72rem; color:var(--muted); margin-top:3px;}
+  .card .tag{position:absolute; top:10px; left:10px; font-size:.68rem; color:var(--gold);
+       border:1px solid var(--gold-soft); background:rgba(10,11,13,.5); padding:3px 9px; border-radius:999px;}
+
+  /* 燈箱 */
+  .lightbox{position:fixed; inset:0; z-index:60; display:none; align-items:center; justify-content:center;
+       background:rgba(8,9,11,.92); backdrop-filter:blur(6px); padding:34px;}
+  .lightbox.open{display:flex;}
+  .lb-stage{position:relative; display:flex; gap:26px; align-items:flex-start; justify-content:center;
+       max-width:1200px; width:100%; flex-wrap:wrap;}
+  .lb-img{max-width:760px; width:100%; flex:1 1 380px; max-height:84vh; object-fit:contain;
+       border-radius:6px; box-shadow:0 30px 80px rgba(0,0,0,.6);}
+  .lb-meta{flex:0 0 260px; border-left:1px solid var(--hairline); padding-left:26px;}
+  .lb-meta .k{font-size:.72rem; color:var(--gold); letter-spacing:.2em; text-transform:uppercase;}
+  .lb-meta h3{font-family:var(--serif); font-weight:600; font-size:1.5rem; margin-top:10px;}
+  .lb-meta .row{margin-top:18px; padding-top:14px; border-top:1px solid var(--hairline); font-size:.86rem;}
+  .lb-meta .row dt{color:var(--faint); font-size:.72rem; letter-spacing:.12em; margin-bottom:2px;}
+  .lb-meta .row dd{color:var(--text);}
+  .lb-close{position:absolute; top:0; right:0; width:42px; height:42px; display:grid; place-items:center;
+       color:var(--text); cursor:pointer; border:1px solid var(--hairline); border-radius:50%;
+       background:var(--surface); transition:border-color .2s;}
+  .lb-close:hover{border-color:var(--gold); color:var(--gold);}
+  .lb-nav{position:absolute; top:50%; transform:translateY(-50%); width:46px; height:46px;
+       display:grid; place-items:center; color:var(--text); cursor:pointer; border:1px solid var(--hairline);
+       border-radius:50%; background:rgba(24,27,31,.7); transition:border-color .2s, color .2s;}
+  .lb-nav.prev{left:8px;} .lb-nav.next{right:8px;}
+  .lb-nav:hover{border-color:var(--gold); color:var(--gold);}
+
+  /* 空態 */
+  .empty{display:none; text-align:center; padding:70px 20px; color:var(--muted);}
+  .empty.show{display:block;}
+  .empty .mark{font-family:var(--serif); font-size:1.5rem; color:var(--faint); margin-bottom:10px;}
+
+  footer{border-top:1px solid var(--hairline); padding:26px 22px 40px; text-align:center;
+       color:var(--faint); font-size:.8rem;}
+  footer code{font-family:monospace; color:var(--muted);}
+
+  @media (max-width:640px){
+    .bar-inner{padding:12px 16px; gap:12px;}
+    .search{order:3; max-width:none; flex-basis:100%;}
+    .search input{font-size:16px;}
+    .filters{padding:12px 16px 2px; gap:8px;}
+    .chip{min-height:44px; padding:10px 18px; font-size:.9rem;}
+    .hero{padding:38px 16px 22px;}
+    .gallery{padding:14px 16px 46px;}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px;}
+    .lb-stage{flex-direction:column; align-items:center;}
+    .lb-meta{flex:none; width:100%; border-left:none; border-top:1px solid var(--hairline);
+       padding-left:0; padding-top:16px;}
+    .lb-nav{width:38px; height:38px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important; animation:none !important;}
+  }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="bar-inner">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+            <path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0z"/><circle cx="12" cy="12" r="3.2"/>
+          </svg>
+        </div>
+        <div>
+          <h1>九回錦 · 藝術典藏</h1>
+          <span class="en">ArtArchive</span>
+        </div>
+      </div>
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/>
+        </svg>
+        <input id="q" type="text" placeholder="搜尋作者、標題或編號…" aria-label="搜尋作品">
+      </div>
+      <div class="count"><b id="shown">0</b> / <span id="total">0</span> 件</div>
+    </div>
+    <nav class="filters" aria-label="分類篩選">
+      <button class="chip on" data-cat="全部">全部</button>
+      <button class="chip" data-cat="油畫">油畫</button>
+      <button class="chip" data-cat="雕塑">雕塑</button>
+      <button class="chip" data-cat="水墨">水墨</button>
+      <span class="legend">點擊縮圖開啟獨立檢視頁</span>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="kicker">Art Collection</div>
+    <h2>藝術典藏圖庫</h2>
+    <p>集中保存原始母檔、WebP 預覽與縮圖；metadata 由 GitHub 版本控管，雲端 Google Drive 承載圖檔。</p>
+    <div class="statline">
+      <div class="stat"><b id="stat-total">0</b><span>館藏作品</span></div>
+      <div class="stat"><b>3</b><span>分類</span></div>
+      <div class="stat"><b id="stat-src">本機</b><span>來源</span></div>
+    </div>
+  </section>
+
+  <main class="gallery">
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty">
+      <div class="mark">尚無符合的作品</div>
+      <div>調整關鍵字或分類後再試。</div>
+    </div>
+  </main>
+
+  <footer>
+    <p>點擊任一作品縮圖可開啟該作品的獨立檢視頁。新增作品請依序執行 <code>scan_build_csv.py</code> → <code>make_webp.py</code> → <code>build_art_data.py</code> → <code>build_work_pages.py</code>。</p>
+  </footer>
+
+  <script src="art_data.js"></script>
+  <script>
+    (function(){
+      const data = (window.ART_DATA || []).slice();
+      const grid = document.getElementById('grid');
+      const empty = document.getElementById('empty');
+      const elQ = document.getElementById('q');
+      const elTotal = document.getElementById('total');
+      const elShown = document.getElementById('shown');
+      const chips = document.querySelectorAll('.chip');
+      const catMap = { '全部':'全部', '油畫':'油畫', '雕塑':'雕塑', '水墨':'水墨' };
+
+      let cat = '全部';
+      let query = '';
+      let list = [];      // 目前篩選後的順序
+
+      function filter(){
+        const q = query.trim();
+        list = data.filter(it => {
+          if (cat !== '全部' && it.category !== cat) return false;
+          if (!q) return true;
+          const hay = (it.title + it.artist + it.art_id + it.category).toLowerCase();
+          return hay.includes(q.toLowerCase());
+        });
+      }
+
+      function render(){
+        filter();
+        grid.innerHTML = '';
+        list.forEach((it, i) => {
+          const card = document.createElement('article');
+          card.className = 'card';
+          card.tabIndex = 0;
+          card.setAttribute('data-i', i);
+          const src = it.thumb || it.preview || '';
+          card.innerHTML =
+            '<span class="tag">' + (it.category || '') + '</span>' +
+            '<img class="thumb" loading="lazy" src="' + src + '" alt="' + (it.title || '') + '">' +
+            '<div class="cap"><div class="t">' + (it.title || '') + '</div>' +
+            '<div class="m">' + (it.artist || '') + (it.year ? ' · ' + it.year : '') + '</div></div>';
+          card.addEventListener('click', () => { window.location.href = (it.art_id || '') + '.html'; });
+          card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.location.href = (it.art_id || '') + '.html'; } });
+          grid.appendChild(card);
+        });
+        elShown.textContent = list.length;
+        elTotal.textContent = data.length;
+        document.getElementById('stat-total').textContent = data.length;
+        empty.classList.toggle('show', list.length === 0);
+        grid.style.display = list.length === 0 ? 'none' : '';
+      }
+
+      chips.forEach(c => c.addEventListener('click', () => {
+        chips.forEach(x => x.classList.remove('on'));
+        c.classList.add('on');
+        cat = catMap[c.dataset.cat] || '全部';
+        render();
+      }));
+
+      elQ.addEventListener('input', () => { query = elQ.value; render(); });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
