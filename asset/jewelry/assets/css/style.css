@@ -462,7 +462,7 @@ a.tag:hover{background:var(--ink);color:var(--gold-bright);border-color:var(--in
 
 /* 浮動站內導航 */
 .float-nav{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:9px;z-index:150}
-.float-nav a{width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--ivory);border-radius:50%;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:opacity .2s,transform .2s}
+.float-nav a{width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--ivory);border-radius:50%;box-shadow:var(--shadow);opacity:1;transform:none;transition:opacity .2s,transform .2s}
 .float-nav a.show{opacity:1;transform:none}
 .float-nav a:hover{background:var(--gold);color:var(--ink-deep)}
 /* LINE 官方圖示：綠底圓角方形＋白氣泡＋綠字，常駐顯示 */
