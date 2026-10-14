@@ -66,7 +66,7 @@ section{padding:clamp(24px,3.5vw,44px) 0}
   box-shadow:0 2px 10px rgba(20,40,32,.25);
 }
 .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold-bright);display:inline-block}
-.sec-head{margin-bottom:clamp(28px,4vw,44px)}
+.sec-head{margin-bottom:clamp(16px,2.5vw,28px)}
 .sec-head h2{font-size:clamp(26px,3.6vw,38px);margin:.1em 0 .3em}
 .sec-head .lede{color:var(--text-soft);font-size:clamp(15px,1.6vw,17px);max-width:62ch}
 
@@ -198,7 +198,7 @@ td:first-child{color:var(--ink);font-weight:600}
 
 /* ---------- 內容文章（正文） ---------- */
 .article{background:rgba(255,253,247,.93);backdrop-filter:blur(3px);border:1px solid rgba(221,211,190,.6);border-radius:var(--radius);padding:clamp(22px,3.6vw,44px)}
-.article h2{font-size:clamp(22px,2.8vw,30px);margin:1.6em 0 .6em;padding-top:.4em;border-top:2px solid var(--ivory-2)}
+.article h2{font-size:clamp(22px,2.8vw,30px);margin:.8em 0 .5em}
 .article h3{font-size:clamp(18px,2.2vw,22px);margin:1.4em 0 .5em}
 .article h4{font-size:17px;margin:1.2em 0 .4em}
 .article ul,.article ol{margin:0 0 1.1em;padding-left:1.4em}
