@@ -78,7 +78,7 @@ BRAND_SVG = (
 )
 
 def _lk(prefix, u):
-    return (prefix + "/" + u) if prefix else u
+    return (prefix.rstrip("/") + "/" + u) if prefix else u
 
 def render_nav(prefix):
     lis = []
@@ -272,7 +272,7 @@ def render_footer(prefix):
   </div>
 </div>
 <nav class="float-nav" aria-label="站內快捷導航">
-  <a class="f-line" href="https://line.me/ti/p/g-FTLSqJAR" target="_blank" rel="noopener" aria-label="加入 LINE 官方帳號"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 1.6C6.2 1.6 1.5 5.8 1.5 10.9c0 4.9 4.2 8.9 9.6 9.2.6 0 1.5.1 2.3.2 1 .2 2.3.7 2 2.6-.1.7.4 1.4 1.1 1.4.6 0 4.1-2.5 5.4-4.3 1.9-2 2.6-3.5 2.6-3.5C23.3 13.5 22.5 1.6 12 1.6zM8.2 13.3c0 .4-.3.7-.7.7H4.6c-.4 0-.7-.3-.7-.7V8.7c0-.4.3-.7.7-.7h1.1c.4 0 .7.3.7.7v3.3h.9c.4 0 .7.3.7.7v.6zm2.1-4.6c0-.4.3-.7.7-.7h1.1c.4 0 .7.3.7.7v1.2c0 .4-.3.7-.7.7h-.7c-.4 0-.7-.3-.7-.7V8.7zm0 2.3c0-.4.3-.7.7-.7h1.1c.4 0 .7.3.7.7v.9c0 .4-.3.7-.7.7h-1.1c-.4 0-.7-.3-.7-.7v-.9zm7.2 2.3c0 .4-.3.7-.7.7h-1.1c-.4 0-.7-.3-.7-.7v-.6c0-.4.3-.7.7-.7h.7c.4 0 .7-.3.7-.7v-.6h-1.1c-.4 0-.7-.3-.7-.7V8.7c0-.4.3-.7.7-.7h1.9c.4 0 .7.3.7.7v4.3zm-5-3.9c0-.4.3-.7.7-.7h1.1c.4 0 .7.3.7.7v4c0 .4-.3.7-.7.7h-1.1c-.4 0-.7-.3-.7-.7v-4z"/></svg></a>
+  <a class="f-line" href="https://line.me/ti/p/g-FTLSqJAR" target="_blank" rel="noopener" aria-label="加入 LINE 官方帳號"><svg viewBox="0 0 48 48" width="100%" height="100%" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#06C755"/><rect x="8" y="12" width="32" height="21" rx="5" fill="#FFFFFF"/><path d="M16 33.5 L12.5 40.5 L21.5 33.5 Z" fill="#FFFFFF"/><text x="24" y="27" text-anchor="middle" font-size="11" font-weight="700" fill="#06C755" font-family="Arial,Helvetica,sans-serif">LINE</text></svg></a>
   <a class="f-back" href="#" aria-label="回上一頁"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v1"/></svg></a>
   <a class="f-home" href="{_lk(prefix,'index.html')}" aria-label="回首頁"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/></svg></a>
 </nav>

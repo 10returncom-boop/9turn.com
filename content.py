@@ -546,15 +546,15 @@ PAGES["asset-index"] = {
 
 <h2>1. 九大資產是哪九樣？憑什麼都算資產？</h2>
 <div class="card-grid">
-  <div class="card"><span class="num">01</span><h3>典藏藝術品</h3><p>來源、展覽與出版紀錄完整的原作。</p><a class="card-link" href="art.html">→</a></div>
-  <div class="card"><span class="num">02</span><h3>典藏宅邸／稀有地產</h3><p>地段稀缺、供給難複製的地產。</p><a class="card-link" href="estate.html">→</a></div>
-  <div class="card"><span class="num">03</span><h3>古董文玩</h3><p>傳世有序、鑑定完整的古器物。</p><a class="card-link" href="antique.html">→</a></div>
-  <div class="card"><span class="num">04</span><h3>珍稀珠寶</h3><p>天然寶石、古董珠寶、大師設計。</p><a class="card-link" href="jewelry.html">→</a></div>
-  <div class="card"><span class="num">05</span><h3>經典酒茶</h3><p>頂級陳年酒與典藏老茶。</p><a class="card-link" href="wine-tea.html">→</a></div>
-  <div class="card"><span class="num">06</span><h3>頂級原木</h3><p>生長週期長、資源枯竭的珍貴大料。</p><a class="card-link" href="timber.html">→</a></div>
-  <div class="card"><span class="num">07</span><h3>經典名錶</h3><p>限量、全套保卡的機械腕錶。</p><a class="card-link" href="watch.html">→</a></div>
-  <div class="card"><span class="num">08</span><h3>經典樂器</h3><p>名家手工製作的聲學傑作。</p><a class="card-link" href="instrument.html">→</a></div>
-  <div class="card"><span class="num">09</span><h3>珍稀錢幣與珍郵</h3><p>古錢、珍稀金銀幣、初版郵票。</p><a class="card-link" href="coin-stamp.html">→</a></div>
+  <div class="card"><img src="assets/img/art.webp" alt="典藏藝術品滿版配圖" loading="lazy"><span class="num">01</span><h3>典藏藝術品</h3><p>來源、展覽與出版紀錄完整的原作。</p><a class="card-link" href="art.html">→</a></div>
+  <div class="card"><img src="assets/img/estate.webp" alt="典藏宅邸稀有地產滿版配圖" loading="lazy"><span class="num">02</span><h3>典藏宅邸／稀有地產</h3><p>地段稀缺、供給難複製的地產。</p><a class="card-link" href="estate.html">→</a></div>
+  <div class="card"><img src="assets/img/antique.webp" alt="古董文玩滿版配圖" loading="lazy"><span class="num">03</span><h3>古董文玩</h3><p>傳世有序、鑑定完整的古器物。</p><a class="card-link" href="antique.html">→</a></div>
+  <div class="card"><img src="assets/img/jewelry.webp" alt="珍稀珠寶滿版配圖" loading="lazy"><span class="num">04</span><h3>珍稀珠寶</h3><p>天然寶石、古董珠寶、大師設計。</p><a class="card-link" href="jewelry.html">→</a></div>
+  <div class="card"><img src="assets/img/wine-tea.webp" alt="經典酒茶滿版配圖" loading="lazy"><span class="num">05</span><h3>經典酒茶</h3><p>頂級陳年酒與典藏老茶。</p><a class="card-link" href="wine-tea.html">→</a></div>
+  <div class="card"><img src="assets/img/timber.webp" alt="頂級原木滿版配圖" loading="lazy"><span class="num">06</span><h3>頂級原木</h3><p>生長週期長、資源枯竭的珍貴大料。</p><a class="card-link" href="timber.html">→</a></div>
+  <div class="card"><img src="assets/img/watch.webp" alt="經典名錶滿版配圖" loading="lazy"><span class="num">07</span><h3>經典名錶</h3><p>限量、全套保卡的機械腕錶。</p><a class="card-link" href="watch.html">→</a></div>
+  <div class="card"><img src="assets/img/instrument.webp" alt="經典樂器滿版配圖" loading="lazy"><span class="num">08</span><h3>經典樂器</h3><p>名家手工製作的聲學傑作。</p><a class="card-link" href="instrument.html">→</a></div>
+  <div class="card"><img src="assets/img/coin.webp" alt="珍稀錢幣與珍郵滿版配圖" loading="lazy"><span class="num">09</span><h3>珍稀錢幣與珍郵</h3><p>古錢、珍稀金銀幣、初版郵票。</p><a class="card-link" href="coin-stamp.html">→</a></div>
 </div>
 
 <h2>2. 九樣資產的共同守則是什麼？</h2>

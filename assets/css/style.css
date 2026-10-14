@@ -50,6 +50,7 @@ a{color:var(--ink-soft)}
 h1,h2,h3,h4{font-family:var(--font-serif);color:var(--ink);line-height:1.35;font-weight:700}
 p{line-height:1.95;margin:0 0 1.1em}
 .container{width:min(1180px,92vw);margin:0 auto;min-width:0}
+.article .container{width:100%;max-width:100%;margin:0;min-width:0}
 .card-grid,.pillar-row,.stat-row,.appendix-band .grid,.footer-grid{min-width:0}
 section{padding:clamp(48px,7vw,88px) 0}
 .hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -142,10 +143,13 @@ section{padding:clamp(48px,7vw,88px) 0}
   background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
   padding:24px;display:flex;flex-direction:column;gap:12px;
   transition:transform .2s,box-shadow .2s;
+  overflow:hidden; /* 防止圖片負margin出血跑出卡片框外 */
 }
 .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
 .card .card-img-wrap{position:relative;margin:-24px -24px 6px;border-radius:var(--radius) var(--radius) 0 0;overflow:hidden}
 .card img{width:100%;height:160px;object-fit:cover;display:block}
+.card-feature img{display:none}
+.pillar-icon{display:none}
 .card .num{font-family:var(--font-serif);font-weight:900;font-size:30px;color:var(--gold)}
 .card h3{margin:0;font-size:20px}
 .card p{margin:0;color:var(--text-soft);font-size:14.5px}
@@ -162,7 +166,7 @@ section{padding:clamp(48px,7vw,88px) 0}
   border-radius:var(--radius);padding:26px;color:var(--ivory);
   border:1px solid rgba(255,255,255,.12);position:relative;overflow:hidden;
 }
-.pillar img{width:calc(100% + 52px);margin:-26px -26px 18px;height:150px;object-fit:cover;display:block}
+.pillar img{width:100%;height:150px;object-fit:cover;display:block;border-radius:6px;margin-bottom:18px}
 .pillar.humanity{background:linear-gradient(150deg,#3A5A4E,#1D3B32)}
 .pillar.earth{background:linear-gradient(150deg,#7C5A34,#4A3520)}
 .pillar.industry{background:linear-gradient(150deg,#31506B,#172B3D)}
@@ -259,9 +263,10 @@ td:first-child{color:var(--ink);font-weight:600}
 .faq details p{margin:.6em 0 0;color:var(--text-soft)}
 
 /* ---------- 附錄章節 ---------- */
-.appendix-band{background:var(--ink);color:var(--ivory);padding:clamp(34px,5vw,56px) 0}
+.appendix-band{background:var(--ink);color:var(--ivory);padding:clamp(34px,5vw,56px) 0;text-align:center}
 .appendix-band h2{color:var(--ivory)}
-.appendix-band .grid{display:grid;grid-template-columns:1fr;gap:16px}
+.appendix-band .grid{display:grid;grid-template-columns:1fr;gap:20px;justify-items:center}
+.appendix-band .btn{margin-top:6px}
 
 /* ---------- 頁尾 ---------- */
 .site-footer{background:var(--ink-deep);color:rgba(247,243,234,.75);padding:56px 0 26px}
@@ -299,7 +304,7 @@ code{background:var(--ivory-2);border:1px solid var(--line);border-radius:6px;pa
   .pillar-row{grid-template-columns:repeat(3,1fr)}
   .stat-row{grid-template-columns:repeat(4,1fr)}
   .pager{grid-template-columns:1fr 1fr}
-  .appendix-band .grid{grid-template-columns:repeat(2,1fr)}
+  .appendix-band .grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:repeat(4,1fr)}
 }
 @media (min-width:900px){
@@ -398,7 +403,7 @@ box-shadow:0 24px 60px rgba(0,0,0,.45);z-index:200;max-height:72vh;overflow:auto
 .toc a:hover{color:var(--gold);border-left-color:var(--gold)}
 .toc a.lvl-3{padding-left:26px;font-size:13px}
 .toc a.active{color:var(--gold);border-left-color:var(--gold);font-weight:700}
-.sidebar .toc{position:sticky;top:96px}
+.sidebar .toc{position:static} /* TOC靜態排列，避免sticky蓋住下方延伸閱讀等box */
 
 /* Treemap 側欄樹狀地圖 */
 .treemap{background:rgba(255,253,247,.9);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:18px}
@@ -441,9 +446,9 @@ a.tag:hover{background:var(--ink);color:var(--gold-bright);border-color:var(--in
 .float-nav a{width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--ivory);border-radius:50%;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:opacity .2s,transform .2s}
 .float-nav a.show{opacity:1;transform:none}
 .float-nav a:hover{background:var(--gold);color:var(--ink-deep)}
-/* 透明小 LINE icon：常駐顯示，不隨捲動隱藏 */
-.float-nav .f-line{width:38px;height:38px;opacity:1;transform:none;background:var(--gold);border:1px solid #B8941F;color:var(--ink-deep);box-shadow:0 6px 18px rgba(8,23,18,.4)}
-.float-nav .f-line:hover{background:var(--gold-bright);color:var(--ink-deep);transform:scale(1.05)}
+/* LINE 官方圖示：綠底圓角方形＋白氣泡＋綠字，常駐顯示 */
+.float-nav .f-line{width:40px;height:40px;opacity:1;transform:none;background:transparent;border:none;border-radius:11px;color:var(--ink-deep);box-shadow:0 6px 18px rgba(8,23,18,.35)}
+.float-nav .f-line:hover{background:transparent;transform:scale(1.06)}
 @media (max-width:719px){.float-nav{right:12px;bottom:12px}}
 
 /* 摺疊 Accordion（文章內） */
@@ -458,11 +463,10 @@ details.acc .acc-body{padding:2px 18px 16px;color:var(--text-soft);font-size:14.
 .asset-fig{margin:0 0 28px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--paper)}
 .asset-fig img{width:100%;height:auto;object-fit:cover;aspect-ratio:4/3}
 .asset-fig figcaption{font-size:12.5px;color:var(--text-soft);padding:10px 16px;border-top:1px solid var(--line);font-family:var(--font-serif);letter-spacing:.02em}/* ========== 內容層改版追加：卡片配圖（rel-card / box） ========== */
-.rel-card{position:relative;overflow:hidden;border:none;padding:0;min-height:148px;
-  background-color:var(--ink-deep);background-size:cover;background-position:center;
-  box-shadow:0 6px 18px rgba(8,23,18,.18)}
-.rel-card::after{content:"";position:absolute;inset:0;z-index:1;
-  background:linear-gradient(180deg,rgba(8,23,18,.06) 0%,rgba(8,23,18,.84) 80%)}
+.rel-card{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.12);padding:18px 18px;min-height:118px;display:flex;flex-direction:column;
+  background:linear-gradient(135deg,#1D3B32,#0E2A23 55%,#162622);box-shadow:0 6px 18px rgba(8,23,18,.18)}
+.rel-card::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(120deg,rgba(201,162,39,.12),rgba(8,23,18,0) 55%)}
 .rel-card .rc-tag{position:relative;z-index:2;align-self:flex-start;margin:14px 0 0 14px;
   padding:3px 10px;background:rgba(14,42,35,.78);border-radius:999px;color:var(--gold-bright)}
 .rel-card .rc-title{position:relative;z-index:2;color:var(--ivory);font-size:14.5px;
@@ -470,221 +474,3 @@ details.acc .acc-body{padding:2px 18px 16px;color:var(--text-soft);font-size:14.
 .rel-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(8,23,18,.28)}
 .box-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;
   margin-bottom:14px;display:block;border:1px solid var(--line)}
-.rel-card[href="01-antique-collecting-intro.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="01-art-collecting-overview.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="01-classic-watch-heirloom.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="01-classical-instrument-collecting-overview.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="01-coin-stamp-intro.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="01-estate-collecting-intro.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="01-positioning.html"]{background-image:url('../img/brand.webp')}
-.rel-card[href="01-timber-as-hard-asset.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="01-why-jewelry-is-hard-asset.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="01-wine-tea-collecting-overview.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="02-antique-five-categories.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="02-art-authenticity-basics.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="02-coin-classification.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="02-diamond-4c-explained.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="02-location-fundamentals.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="02-movement-basics.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="02-origin.html"]{background-image:url('../img/brand.webp')}
-.rel-card[href="02-rare-wood-species-overview.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="02-violin-beginner-master-vs-student.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="02-whisky-single-malt-guide.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="03-antique-authenticity-basics.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="03-architecture-historic-value.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="03-colored-gemstones-ruby-sapphire-emerald.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="03-connoisseurship-checkpoints.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="03-five-classic-brands.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="03-philosophy.html"]{background-image:url('../img/brand.webp')}
-.rel-card[href="03-piano-guitar-collecting-logic.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="03-stamp-types.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="03-wine-vintage-region-chateau.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="03-wood-identification-basics.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="04-aged-tea-puer-oolong.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="04-antique-condition-restoration.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="04-authentication-checkpoints.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="04-authenticity-label-craft-acoustics.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="04-condition-restoration-record.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="04-gia-certificate-how-to-read.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="04-grading-companies.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="04-origin-and-legal-traceability.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="04-slogans.html"]{background-image:url('../img/brand.webp')}
-.rel-card[href="04-title-search-ownership.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="05-antique-jewelry-eras-market.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="05-antique-provenance.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="05-authenticity-label-wrapping.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="05-condition-originality.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="05-condition-repair-history.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="05-die-variety-error.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="05-drying-and-quality-judgment.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="05-provenance-certificate-catalogue.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="05-zoning-far-urban-renewal.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="06-acoustic-evaluation-trial-play.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="06-antique-price-reading.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="06-auction-index-price-logic.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="06-catalog-vs-auction.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="06-gem-pricing-vs-brand-premium.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="06-market-price-logic.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="06-price-registration-comparison.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="06-vintage-condition-check.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="06-warranty-papers-full-set.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="07-antique-channels.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="07-auction-house-process.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="07-auction-market-indicators.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="07-buying-channels-jewelry.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="07-buying-channels.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="07-how-to-read-prices.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="07-market-price-auction-master-violin.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="07-trading-channels-guide.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="07-transaction-channels.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="08-antique-market-cycle.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="08-art-market-cycle.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="08-buying-channels.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="08-jewelry-market-cycle.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="08-market-cycle.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="08-market-cycles.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="08-trading-channels-wine-merchant.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="08-transaction-channels-dealer-auction-collector.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="09-antique-negotiation-timing.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="09-buying-timing-negotiation.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="09-market-cycle-long-term-value.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="09-market-cycle-longterm.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="09-market-cycle.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="09-negotiation-and-inspection.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="09-negotiation-buy.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="09-negotiation-strategy.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="10-antique-beginner-traps.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="10-beginner-fakes-scams.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="10-beginner-pitfalls.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="10-beginner-trap-fake-label-sales-talk.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="10-beginner-traps-fake-wetware.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="10-beginner-traps-fakes.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="10-beginner-traps-synthetic-treated.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="10-beginner-traps.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="11-antique-preservation.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="11-conservation-basics-humidity.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="11-jewelry-care-storage.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="11-old-house-maintenance.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="11-preservation-and-care.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="11-preservation-humidity-case-bow.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="11-storage-care.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="11-storage-humidity-wake-tea.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="12-antique-pro-restoration.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="12-opening-tasting-verification.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="12-processing-and-utilization.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="12-professional-cleaning.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="12-professional-repair-luthier.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="12-professional-restoration.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="12-repair-and-remounting.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="12-revitalization-reuse.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="12-service-maintenance.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="13-antique-insurance-appraisal.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="13-insurance-and-valuation.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="13-insurance-appraisal.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="13-insurance-property-tax.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="13-insurance-valuation-cellar.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="13-insurance-valuation.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="14-taiwan-culture-law-tax.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="14-taiwan-tax-and-regulation.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="14-taiwan-tax-customs-cites.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="14-taiwan-tax-law.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="14-taiwan-tax-regulation.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="14-tax-estate-inheritance.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="15-antique-liquidation.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="15-liquidation-exit-channel.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="15-liquidation-exit-timing.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="15-liquidation.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="15-liquidity-rental-sale.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="15-liquidity-resale-channels.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="15-resale-liquidity.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="15-selling-monetize.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="16-antique-collection-system.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="16-asset-allocation-consumable.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="16-asset-allocation-logic.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="16-asset-allocation.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="16-collection-logic.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="16-collection-portfolio-allocation.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="16-jewelry-in-asset-allocation.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="17-antique-family-inheritance.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="17-family-heirloom.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="17-family-heritage-music-education.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="17-family-inheritance-planning.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="17-family-inheritance-value.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="17-family-inheritance.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="17-family-legacy.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="17-family-succession-trust.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="18-antique-donation-museum.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="18-auctions-and-exhibitions.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="18-cultural-heritage-old-timber-buildings.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="18-donation-museum-loan.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="18-heritage-preservation.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="18-loan-exhibition-performance.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="18-museum-brand-history.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="18-museum-exhibition.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="18-winery-tea-mountain-origin.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="19-antique-international.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="19-cremona-global-market.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="19-global-resource-southeast-africa-southamerica.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="19-global-scotland-bordeaux-asia.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="19-hong-kong-geneva-auction-markets.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="19-international-market-ny-london-hk.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="19-international-market.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="19-international-markets.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="20-antique-tech-era.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="20-blockchain-digital-online-auction.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="20-certified-pre-owned.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="20-digital-acoustic-testing-certification.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="20-digital-tech.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="20-lab-grown-and-technology.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="20-tech-and-sustainable-certification.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="20-tech-online-auction-nft-traceability.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="21-antique-faq.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="21-collecting-faq.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="21-faq-beginner-ten-questions.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="21-faq-beginner-top-ten.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="21-faq-ten-questions.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="21-faq.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="21-timber-faq-ten-questions.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="22-action-checklist-22-steps.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="22-action-checklist-twenty-two-steps.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="22-action-checklist.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="22-antique-action-checklist.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="allocation.html"]{background-image:url('../img/service.webp')}
-.rel-card[href="antique-authenticity.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="antique.html"]{background-image:url('../img/antique.webp')}
-.rel-card[href="art-appreciation.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="art.html"]{background-image:url('../img/art.webp')}
-.rel-card[href="asset-allocation.html"]{background-image:url('../img/asset.webp')}
-.rel-card[href="coin-grading.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="coin-stamp.html"]{background-image:url('../img/coin.webp')}
-.rel-card[href="disclaimer.html"]{background-image:url('../img/appendix.webp')}
-.rel-card[href="due-diligence.html"]{background-image:url('../img/service.webp')}
-.rel-card[href="earth.html"]{background-image:url('../img/category.webp')}
-.rel-card[href="estate-logic.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="estate.html"]{background-image:url('../img/estate.webp')}
-.rel-card[href="faq.html"]{background-image:url('../img/appendix.webp')}
-.rel-card[href="gem-grading.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="glossary.html"]{background-image:url('../img/appendix.webp')}
-.rel-card[href="holding-guide.html"]{background-image:url('../img/appendix.webp')}
-.rel-card[href="holding-plan.html"]{background-image:url('../img/service.webp')}
-.rel-card[href="humanity.html"]{background-image:url('../img/category.webp')}
-.rel-card[href="index.html"]{background-image:url('../img/asset.webp')}
-.rel-card[href="industry.html"]{background-image:url('../img/category.webp')}
-.rel-card[href="instrument-acoustics.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="instrument.html"]{background-image:url('../img/instrument.webp')}
-.rel-card[href="jewelry.html"]{background-image:url('../img/jewelry.webp')}
-.rel-card[href="longterm.html"]{background-image:url('../img/criteria.webp')}
-.rel-card[href="market-watch.html"]{background-image:url('../img/service.webp')}
-.rel-card[href="matchmaking.html"]{background-image:url('../img/service.webp')}
-.rel-card[href="provenance-guide.html"]{background-image:url('../img/appendix.webp')}
-.rel-card[href="provenance.html"]{background-image:url('../img/criteria.webp')}
-.rel-card[href="regulation.html"]{background-image:url('../img/appendix.webp')}
-.rel-card[href="risk-management.html"]{background-image:url('../img/knowledge.webp')}
-.rel-card[href="scarcity.html"]{background-image:url('../img/criteria.webp')}
-.rel-card[href="timber-provenance.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="timber.html"]{background-image:url('../img/timber.webp')}
-.rel-card[href="value.html"]{background-image:url('../img/criteria.webp')}
-.rel-card[href="watch-movement.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="watch.html"]{background-image:url('../img/watch.webp')}
-.rel-card[href="wine-aging.html"]{background-image:url('../img/wine-tea.webp')}
-.rel-card[href="wine-tea.html"]{background-image:url('../img/wine-tea.webp')}
