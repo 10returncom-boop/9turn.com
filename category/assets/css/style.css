@@ -58,11 +58,14 @@ section{padding:clamp(24px,3.5vw,44px) 0}
 /* ---------- 章節編號 / 眉標 ---------- */
 .eyebrow{
   font-family:var(--font-serif);
-  font-size:13px;letter-spacing:.32em;
-  color:var(--gold);text-transform:uppercase;
-  margin:0 0 10px;display:flex;align-items:center;gap:10px;
+  font-size:13px;letter-spacing:.28em;
+  color:var(--ivory);text-transform:uppercase;
+  margin:0 0 14px;display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,#2C4A3E,#1D3B32 60%,#152B24);
+  padding:8px 18px;border-radius:999px;
+  box-shadow:0 2px 10px rgba(20,40,32,.25);
 }
-.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold);display:inline-block}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold-bright);display:inline-block}
 .sec-head{margin-bottom:clamp(28px,4vw,44px)}
 .sec-head h2{font-size:clamp(26px,3.6vw,38px);margin:.1em 0 .3em}
 .sec-head .lede{color:var(--text-soft);font-size:clamp(15px,1.6vw,17px);max-width:62ch}
