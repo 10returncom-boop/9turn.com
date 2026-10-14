@@ -168,6 +168,17 @@ section{padding:clamp(24px,3.5vw,44px) 0}
 .card-feature:nth-child(3){background:linear-gradient(150deg,#31506B,#172B3D)}
 .card-feature:nth-child(4){background:linear-gradient(150deg,#5C3A4E,#2D1A28)}
 
+/* 四大準則按鈕 */
+.criteria-btns{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:560px){.criteria-btns{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.criteria-btns{grid-template-columns:repeat(4,1fr)}}
+.cbtn{padding:26px 16px;text-align:center;color:var(--ivory);text-decoration:none;border-radius:var(--radius);font-family:var(--font-serif);font-size:18px;font-weight:700;letter-spacing:.1em;transition:transform .2s,box-shadow .2s;display:block}
+.cbtn:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.cbtn-1{background:linear-gradient(150deg,#3A5A4E,#1D3B32)}
+.cbtn-2{background:linear-gradient(150deg,#7C5A34,#4A3520)}
+.cbtn-3{background:linear-gradient(150deg,#31506B,#172B3D)}
+.cbtn-4{background:linear-gradient(150deg,#5C3A4E,#2D1A28)}
+
 /* ---------- 三大分類橫條 ---------- */
 .pillar-row{display:grid;grid-template-columns:1fr;gap:16px}
 .pillar{
