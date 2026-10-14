@@ -458,7 +458,7 @@ box-shadow:0 24px 60px rgba(0,0,0,.45);z-index:200;max-height:72vh;overflow:auto
 .rc-title{font-family:var(--font-serif);font-weight:700;font-size:15px;color:var(--ink);line-height:1.5}
 
 /* 標籤雲（footer） */
-.tag-cloud{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid var(--line);padding:18px 0;margin:8px 0 4px}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;border-top:1px solid var(--line);padding:18px 0;margin:8px 0 4px}
 .tc-title{font-family:var(--font-serif);font-weight:700;color:var(--ink);margin-right:8px;font-size:14px}
 a.tag{display:inline-block;padding:5px 12px;background:var(--ivory-2);border:1px solid var(--line);border-radius:999px;color:var(--ink-soft);font-size:12.5px;text-decoration:none}
 a.tag:hover{background:var(--ink);color:var(--gold-bright);border-color:var(--ink)}
