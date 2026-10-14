@@ -1,3 +1,23 @@
-# 自檢與備份產出（非網站內容，不納入版本控制）
+# ===== 靜態網站發布用 .gitignore =====
+# 只保留 GitHub Pages 需要的靜態檔案，開發工具留在 local
+
+# Python 生成器與修復腳本
+*.py
+__pycache__/
+__pycache__/**
+
+# 開發規格文件
+*.md
+!readme.md
+
+# Excel 與試算表
+*.xlsx
+*.xls
+*.csv
+sheets/
+
+# 自檢與備份產出
 _shots/
 _backup/
+*.log
+*.tmp
