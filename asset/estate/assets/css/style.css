@@ -143,7 +143,7 @@ section{padding:clamp(24px,3.5vw,44px) 0}
 /* ---------- 卡片 ---------- */
 .card-grid{display:grid;gap:20px;grid-template-columns:1fr}
 .card{
-  background:linear-gradient(150deg,#D4E4C8,#EDE4B8);border:none;border-radius:var(--radius);
+  background:linear-gradient(160deg,#F0EDE0 0%,#E4E0D0 40%,#D4D8C4 100%);border:none;border-radius:var(--radius);
   padding:0 18px 18px;display:flex;flex-direction:column;
   transition:transform .2s,box-shadow .2s;
   overflow:hidden;position:relative;color:var(--ink-deep);
