@@ -150,7 +150,7 @@ section{padding:clamp(24px,3.5vw,44px) 0}
   box-shadow:0 4px 16px rgba(40,60,30,.12);
 }
 .card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(40,60,30,.2)}
-.card img{width:calc(100% + 36px);margin:0 -18px 0;height:160px;object-fit:cover;display:block}
+.card img{width:calc(100% + 36px);margin:0 -18px 0;height:160px;object-fit:cover;display:block;border-radius:var(--radius) var(--radius) 0 0}
 .card-feature img{display:none}
 .pillar-icon{display:none}
 .card .num{position:absolute;top:16px;left:18px;z-index:2;font-family:var(--font-serif);font-weight:900;font-size:28px;color:var(--gold);text-shadow:0 1px 6px rgba(255,255,255,.7);line-height:1}
@@ -326,12 +326,13 @@ code{background:var(--ivory-2);border:1px solid var(--line);border-radius:6px;pa
   .stat-row{grid-template-columns:repeat(4,1fr)}
   .pager{grid-template-columns:1fr 1fr}
   .appendix-band .grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:repeat(4,1fr)}
+  .footer-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (min-width:900px){
   .layout-2col{grid-template-columns:minmax(0,1fr) 300px}
   .sidebar{order:1}
   .sidebar{order:0}
+  .footer-grid{grid-template-columns:repeat(4,1fr)}
 }
 @media (min-width:720px){
   .nav-toggle{display:none}
