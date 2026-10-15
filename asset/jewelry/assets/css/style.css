@@ -290,11 +290,11 @@ td:first-child{color:var(--ink);font-weight:600}
 
 /* ---------- 頁尾 ---------- */
 .site-footer{background:var(--ink-deep);color:rgba(247,243,234,.75);padding:56px 0 26px}
-.footer-grid{display:grid;grid-template-columns:1fr;gap:28px}
-.footer-grid h5{color:var(--gold-bright);font-family:var(--font-serif);margin:0 0 12px;font-size:16px}
-.footer-grid a{display:block;color:rgba(247,243,234,.75);text-decoration:none;font-size:14px;padding:3px 0}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:28px;text-align:center}
+.footer-grid h5{color:var(--gold-bright);font-family:var(--font-serif);margin:0 0 12px;font-size:16px;text-align:center}
+.footer-grid a{display:block;color:rgba(247,243,234,.75);text-decoration:none;font-size:14px;padding:3px 0;text-align:center}
 .footer-grid a:hover{color:var(--gold-bright)}
-.footer-note{color:rgba(247,243,234,.45);font-size:12.5px;line-height:1.7;margin-top:26px;border-top:1px solid rgba(201,162,39,.2);padding-top:18px}
+.footer-note{color:rgba(247,243,234,.45);font-size:12.5px;line-height:1.7;margin-top:26px;border-top:1px solid rgba(201,162,39,.2);padding-top:18px;text-align:center}
 .copyright{text-align:center;font-size:13px;color:rgba(247,243,234,.5);margin-top:22px}
 .credit{text-align:center;font-size:12px;color:rgba(247,243,234,.35);margin-top:6px}
 
