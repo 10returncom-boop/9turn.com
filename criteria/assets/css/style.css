@@ -154,10 +154,10 @@ section{padding:clamp(24px,3.5vw,44px) 0}
 .card-feature img{display:none}
 .pillar-icon{display:none}
 .card .num{position:absolute;top:16px;left:18px;z-index:2;font-family:var(--font-serif);font-weight:900;font-size:28px;color:var(--gold);text-shadow:0 1px 6px rgba(255,255,255,.7);line-height:1}
-.card h3{margin:14px 18px 0;font-size:19px;color:var(--ink-deep)}
-.card p{margin:0 18px;color:var(--ink-soft);font-size:14px;line-height:1.6}
+.card h3{margin:14px 18px 0;padding:0;font-size:19px;color:var(--ink-deep)}
+.card p{margin:0 18px;padding:0;text-indent:0;color:var(--ink-soft);font-size:14px;line-height:1.6}
 .card .tag{color:var(--teak);font-size:12.5px;letter-spacing:.08em;font-weight:600}
-.card a.card-link{margin:auto 18px 18px;color:var(--teak);font-size:14px;text-decoration:none;font-weight:600}
+.card a.card-link{margin:8px 18px 18px;padding:0;color:var(--teak);font-size:14px;text-decoration:none;font-weight:600}
 .card a.card-link:hover{text-decoration:underline}
 
 /* 精選功能卡（漸層色） */
